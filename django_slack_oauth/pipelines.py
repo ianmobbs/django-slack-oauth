@@ -16,7 +16,7 @@ __all__ = (
 
 def log_request(request, api_data):
     SlackOAuthRequest.objects.create(
-        access_token=api_data.pop('access_token'),
+        access_token=api_data['access_token'],
         extras=api_data
     )
 
@@ -35,7 +35,7 @@ def slack_user(request, api_data):
     data = deepcopy(api_data)
 
     slacker, _ = SlackUser.objects.get_or_create(slacker=request.user)
-    slacker.access_token = data.pop('access_token')
+    slacker.access_token = data['access_token']
     slacker.extras = data
     slacker.save()
 
